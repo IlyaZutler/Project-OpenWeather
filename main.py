@@ -5,7 +5,7 @@ import base64
 import requests
 import json
 import matplotlib.pyplot as plt
-from IPython import get_ipython
+#from IPython import get_ipython
 import pandas as pd
 
 def get_defolt_parametrs(url):
