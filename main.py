@@ -41,7 +41,7 @@ def data_to_lists(data):
     # Convert dt_txt to datetime objects
     dt_txt_datetime = []
     for date_str in dt_txt:
-        dt_txt_datetime.append(datetime.datetime.strptime(date_str, '%Y-%m-%d    %H:%M'))
+        dt_txt_datetime.append(datetime.datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S'))
     return dt_txt_datetime, temp, temp_min, temp_max, humidity, description
 
 
@@ -160,7 +160,8 @@ else:
             dt_txt_datetime, temp, temp_min, temp_max, humidity, description = data_to_lists(data)
             sunrise, sunset = get_sun_time(data)
             local_time = time_in_the_city(data)
-            st.write(f'Time in the {city}:  {local_time.strftime("%H:%M   %d.%m.%Y")}')
+
+            st.write(f'Time in the {city}:  {local_time.strftime("%H:%M     %d.%m.%Y")}')
             st.write(f'Sunrise:      {sunrise.strftime("%H:%M")}')
             st.write(f'Sunset:       {sunset.strftime("%H:%M")}')
             st.write(f'Temperature:  from {temp_min[0]:.1f}  to {temp_max[0]:.1f} °C')
