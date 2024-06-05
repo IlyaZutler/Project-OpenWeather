@@ -16,7 +16,6 @@ def get_defolt_parametrs(url):
 
 def get_weather(city, units, key):
     api_url = "http://api.openweathermap.org/data/2.5/forecast"
-
     response = requests.get(api_url, params={"q": city, "units": units, "appid": key})
     if response.status_code == 200:
         return response.json()
@@ -45,8 +44,6 @@ def data_to_lists(data):
 
 
 def plot_weather(dt_txt_datetime, temp, city):
-
-    # Extract month, day, and hour from datetime objects
     day_month_hour = []
     for time_obs in dt_txt_datetime:
         day_month_hour.append(f'{time_obs.day}.{time_obs.month}  {time_obs.hour}:00')
@@ -90,6 +87,17 @@ def table_of_data(dt_txt_datetime, temp_min, temp_max, humidity, description):
     df.set_index('day_time', inplace = True)
     return df
 
+def make_df_for_streamlit(dt_txt_datetime, temp):
+    day_month_hour = []
+    for time_obs in dt_txt_datetime:
+        day_month_hour.append(time_obs.strftime("%d.%m %H:%M"))
+    tabla = {
+        'day_time': day_month_hour,
+        'temp': temp
+    }
+    df = pd.DataFrame(tabla)
+    df.set_index('day_time', inplace = True)
+    return df
 
 #main part
 
@@ -154,10 +162,9 @@ else:
             st.write(f'Temperature:  from {temp_min[0]:.1f}  to {temp_max[0]:.1f} °C')
             st.write(f'Weather:      {description[0]}')
             st.write(f'Humidity:     {humidity[0]} %')
-
-
-        #st.write(data)
-        #st.line_chart(df)
+            df = make_df_for_streamlit(dt_txt_datetime, temp)
+            st.line_chart(df)
+            st.dataframe(table_of_data(dt_txt_datetime, temp_min, temp_max, humidity, description))
 
 
 
