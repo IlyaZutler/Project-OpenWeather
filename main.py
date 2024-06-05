@@ -75,7 +75,7 @@ def get_sun_time(data):
 def table_of_data(dt_txt_datetime, temp_min, temp_max, humidity, description):
     day_month_hour = []
     for time_obs in dt_txt_datetime:
-        day_month_hour.append(time_obs.strftime("%d.%m.%Y %H:%M:%S"))
+        day_month_hour.append(time_obs.strftime("%d.%m.%Y   %H:%M:%S"))
     tabla = {
         'day_time': day_month_hour,
         'temp_min': temp_min,
@@ -90,7 +90,7 @@ def table_of_data(dt_txt_datetime, temp_min, temp_max, humidity, description):
 def make_df_for_streamlit(dt_txt_datetime, temp):
     day_month_hour = []
     for time_obs in dt_txt_datetime:
-        day_month_hour.append(time_obs.strftime("%d.%m %H:%M"))
+        day_month_hour.append(time_obs.strftime("%d.%m   %H:%M"))
     tabla = {
         'day_time': day_month_hour,
         'temp': temp
@@ -164,6 +164,9 @@ else:
             st.write(f'Humidity:     {humidity[0]} %')
             df = make_df_for_streamlit(dt_txt_datetime, temp)
             st.line_chart(df)
+            # data_with_grid = df.style.set_properties(**{'background-color': 'rgba(0, 0, 0, 0.1)', 'color': 'black'})
+            # st.line_chart(data_with_grid, use_container_width=True)
+
             st.dataframe(table_of_data(dt_txt_datetime, temp_min, temp_max, humidity, description))
 
 
