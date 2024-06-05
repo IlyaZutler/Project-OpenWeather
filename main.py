@@ -1,5 +1,6 @@
 import streamlit as st
 import datetime
+from datetime import timedelta
 import base64
 import requests
 import json
@@ -64,12 +65,12 @@ def time_in_the_city(data):
     local_time = utc_now.astimezone(timezone)
     return local_time
 
-def unix_to_datetime(unix_timestamp):
-    return datetime.datetime.fromtimestamp(unix_timestamp)
-
 def get_sun_time(data):
-    sunrise = unix_to_datetime(data['city']['sunrise'])
-    sunset = unix_to_datetime(data['city']['sunset'])
+    tz_offset = timedelta(seconds = data['city']['timezone'])
+
+    sunrise = datetime.datetime.fromtimestamp(data['city']['sunrise']) + tz_offset
+    sunset = datetime.datetime.fromtimestamp(data['city']['sunset']) + tz_offset
+
     return sunrise, sunset
 
 def table_of_data(dt_txt_datetime, temp_min, temp_max, humidity, description):
@@ -141,17 +142,20 @@ if 'google.colab' in str(get_ipython()):
 
             print(table_of_data(dt_txt_datetime, temp_min, temp_max, humidity, description))
             print()
-        want_add = input("Enter 1 to Continue or 0 to Exit: ")
-        request = (want_add == '1')
+
+        # weather chart covers the input field
+        # want_add = input("Enter 1 to Continue or 0 to Exit: ")
+        # request = (want_add == '1')
+        request = False
 
 else:
-    st.title('Open Weather Forecast')
+    st.title('OpenWeather Forecast')
     st.write(hi)
     city = st.text_input('Enter City name: ', city)
     if st.button('Show Weather'):
         data = get_weather(city, units, key)
         if not data:
-            st.write('Somthing gonna wrong...')
+            st.write('Something is going wrong......')
         else:
             dt_txt_datetime, temp, temp_min, temp_max, humidity, description = data_to_lists(data)
             sunrise, sunset = get_sun_time(data)
