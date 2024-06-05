@@ -40,7 +40,7 @@ def data_to_lists(data):
     # Convert dt_txt to datetime objects
     dt_txt_datetime = []
     for date_str in dt_txt:
-        dt_txt_datetime.append(datetime.datetime.strptime(date_str, '%Y-%m-%d    %H:%M:%S'))
+        dt_txt_datetime.append(datetime.datetime.strptime(date_str, '%Y-%m-%d    %H:%M'))
     return dt_txt_datetime, temp, temp_min, temp_max, humidity, description
 
 
@@ -75,7 +75,7 @@ def get_sun_time(data):
 def table_of_data(dt_txt_datetime, temp_min, temp_max, humidity, description):
     day_month_hour = []
     for time_obs in dt_txt_datetime:
-        day_month_hour.append(time_obs.strftime("%d.%m.%Y   %H:%M:%S"))
+        day_month_hour.append(time_obs.strftime("%d.%m.%Y   %H:%M"))
     tabla = {
         'day_time': day_month_hour,
         'temp_min °C': temp_min,
