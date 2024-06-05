@@ -124,7 +124,7 @@ if 'google.colab' in str(get_ipython()):
 
         data = get_weather(city, units, key)
         if not data:
-            print('Somthing gonna wrong...')
+            print('Something is going wrong......')
         else:
             dt_txt_datetime, temp, temp_min, temp_max, humidity, description = data_to_lists(data)
             sunrise, sunset = get_sun_time(data)
