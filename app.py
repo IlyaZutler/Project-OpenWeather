@@ -1,10 +1,11 @@
-
 import datetime
 from datetime import timedelta
+import pytz
 import requests
 import json
 import matplotlib.pyplot as plt
 import pandas as pd
+import streamlit as st
 
 def get_defolt_parametrs(url):
     response = requests.get(url)
@@ -62,20 +63,11 @@ def plot_weather(dt_txt_datetime, temp, city):
 
     plt.show()
 
-# def time_in_the_city(data):
-#     city_timezone = data['city']['timezone']
-#
-#     utc_now = datetime.datetime.utcnow()
-#     timezone = datetime.timezone(datetime.timedelta(seconds=city_timezone))
-#     local_time = utc_now.astimezone(timezone)
-#     return local_time
-
 def time_in_the_city(data):
     city_timezone = data['city']['timezone']
     utc_now = datetime.datetime.utcnow()
     local_time = utc_now + datetime.timedelta(seconds=city_timezone)
     return local_time
-
 
 def get_sun_time(data):
     sunrise = datetime.datetime.fromtimestamp(data['city']['sunrise'] + data['city']['timezone'])
@@ -108,6 +100,44 @@ def make_df_for_streamlit(dt_txt_datetime, temp):
         'day_time': day_month_hour,
         'temp': temp
     }
-    df =  pd.DataFrame(tabla)
+    df = pd.DataFrame(tabla)
     df.set_index('day_time', inplace = True)
     return df
+
+
+hi = '''A weather forecaster is like a sapper  - 
+he makes mistakes only once
+(but every day) \n'''
+
+url = "https://raw.githubusercontent.com/IlyaZutler/Project-OpenWeather/main/param_defolt.json"
+
+defolt_parametrs = get_defolt_parametrs(url)
+city = defolt_parametrs['params']['city']
+units = defolt_parametrs['params']['units']
+key = defolt_parametrs['params']['key']
+
+
+st.title('OpenWeather Forecast')
+st.write(hi)
+city = st.text_input('Enter City name: ', city)
+if st.button('Show Weather'):
+    data = get_weather(city, units, key)
+    if not data:
+        st.write('Something is going wrong......')
+    else:
+        dt_txt_datetime, temp, temp_min, temp_max, humidity, description = data_to_lists(data)
+        sunrise, sunset = get_sun_time(data)
+        local_time = time_in_the_city(data)
+
+        st.write(f'Time in the {city}:  {local_time.strftime("%H:%M     %d.%m.%Y")}')
+        st.write(f'Sunrise:      {sunrise.strftime("%H:%M")}')
+        st.write(f'Sunset:       {sunset.strftime("%H:%M")}')
+        st.write(f'Temperature Now:  from {temp_min[0]:.1f}  to {temp_max[0]:.1f} °C')
+        st.write(f'Weather Now:      {description[0]}')
+        st.write(f'Humidity Now:     {humidity[0]} %')
+        df = make_df_for_streamlit(dt_txt_datetime, temp)
+        st.line_chart(df)
+        # data_with_grid = df.style.set_properties(**{'background-color': 'rgba(0, 0, 0, 0.1)', 'color': 'black'})
+        # st.line_chart(data_with_grid, use_container_width=True)
+
+        st.dataframe(table_of_data(dt_txt_datetime, temp_min, temp_max, humidity, description))
