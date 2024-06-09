@@ -70,8 +70,8 @@ def time_in_the_city(data):
     return local_time
 
 def get_sun_time(data):
-    sunrise = datetime.datetime.fromtimestamp(data['city']['sunrise'] + data['city']['timezone'])
-    sunset = datetime.datetime.fromtimestamp(data['city']['sunset'] + data['city']['timezone'])
+    sunrise = datetime.datetime.fromtimestamp(data['city']['sunrise'] + data['city']['timezone'], datetime.timezone.utc)
+    sunset = datetime.datetime.fromtimestamp(data['city']['sunset'] + data['city']['timezone'], datetime.timezone.utc)
     return sunrise, sunset
 
 def table_of_data(dt_txt_datetime, temp_min, temp_max, humidity, description):
@@ -128,6 +128,8 @@ if st.button('Show Weather'):
         dt_txt_datetime, temp, temp_min, temp_max, humidity, description = data_to_lists(data)
         sunrise, sunset = get_sun_time(data)
         local_time = time_in_the_city(data)
+
+        st.write(datetime.datetime.fromtimestamp(1717986848))
 
         st.write(f'Time in the {city}:  {local_time.strftime("%H:%M     %d.%m.%Y")}')
         st.write(f'Sunrise:      {sunrise.strftime("%H:%M")}')

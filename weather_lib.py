@@ -59,27 +59,17 @@ def plot_weather(dt_txt_datetime, temp, city):
     plt.title(f'Temperature Forecast for {city}')
     plt.xticks(rotation=45)
     plt.grid(True)
-
     plt.show()
-
-# def time_in_the_city(data):
-#     city_timezone = data['city']['timezone']
-#
-#     utc_now = datetime.datetime.utcnow()
-#     timezone = datetime.timezone(datetime.timedelta(seconds=city_timezone))
-#     local_time = utc_now.astimezone(timezone)
-#     return local_time
 
 def time_in_the_city(data):
     city_timezone = data['city']['timezone']
     utc_now = datetime.datetime.utcnow()
-    local_time = utc_now + datetime.timedelta(seconds=city_timezone)
+    local_time = utc_now + datetime.timedelta(seconds = city_timezone)
     return local_time
 
-
 def get_sun_time(data):
-    sunrise = datetime.datetime.fromtimestamp(data['city']['sunrise'] + data['city']['timezone'])
-    sunset = datetime.datetime.fromtimestamp(data['city']['sunset'] + data['city']['timezone'])
+    sunrise = datetime.datetime.fromtimestamp(data['city']['sunrise'] + data['city']['timezone'], datetime.timezone.utc)
+    sunset = datetime.datetime.fromtimestamp(data['city']['sunset'] + data['city']['timezone'], datetime.timezone.utc)
     return sunrise, sunset
 
 def table_of_data(dt_txt_datetime, temp_min, temp_max, humidity, description):
