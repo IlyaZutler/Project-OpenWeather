@@ -129,8 +129,6 @@ if st.button('Show Weather'):
         sunrise, sunset = get_sun_time(data)
         local_time = time_in_the_city(data)
 
-        st.write(datetime.datetime.fromtimestamp(1717986848))
-
         st.write(f'Time in the {city}:  {local_time.strftime("%H:%M     %d.%m.%Y")}')
         st.write(f'Sunrise:      {sunrise.strftime("%H:%M")}')
         st.write(f'Sunset:       {sunset.strftime("%H:%M")}')

@@ -73,7 +73,6 @@ def get_sun_time(data):
     return sunrise, sunset
 
 def table_of_data(dt_txt_datetime, temp_min, temp_max, humidity, description):
-# Create a dictionary with the data
     day_month_hour = []
     for time_obs in dt_txt_datetime:
         day_month_hour.append(time_obs.strftime("%d.%m.%Y    %H:%M"))
