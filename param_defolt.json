@@ -3,5 +3,8 @@
         "city": "Jerusalem",
         "units": "metric",
         "key": "e7df4a8e075be92ad1b7835b674e5540"
+    },
+    "welcome": {
+        "hi": " A weather forecaster is like a sapper  -\nhe makes mistakes only once\n(but every day) \n "
     }
 }

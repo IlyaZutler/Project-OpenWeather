@@ -2,16 +2,14 @@ from weather_lib import *
 import weather_lib as wlib
 import streamlit as st
 
-hi = '''A weather forecaster is like a sapper  - 
-he makes mistakes only once
-(but every day) \n'''
-
 url = "https://raw.githubusercontent.com/IlyaZutler/Project-OpenWeather/main/param_defolt.json"
 
 defolt_parametrs = wlib.get_defolt_parametrs(url)
 city = defolt_parametrs['params']['city']
 units = defolt_parametrs['params']['units']
 key = defolt_parametrs['params']['key']
+hi = defolt_parametrs['welcome']['hi']
+
 
 st.title('OpenWeather Forecast')
 st.write(hi)
