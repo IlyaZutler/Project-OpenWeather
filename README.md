@@ -1,6 +1,7 @@
 # Project OpenWeather
 
 Цель проекта
+
 Программа предназначена для предоставления информации о погоде в запрашиваемом Городе.
 По запросу сервис предоставляет информацию:
 Локальное время в городе
@@ -13,13 +14,16 @@
 Таблицу с расширенными данными о прогнозе погоды на 5 днейю
 
 Реализация
+
 Информация о погоде получается по API от сервиса OpenWeatherMap.
 Постоянные настройки размещены в файле param_defolt.json
 Использованные функции вынесены в файл библиотеку weather_lib.py
 Файл colab_weather_sh.ipynb для запуска программы из colab
 Файл main.py используется для запуска с сервиса streamlit 
 
+
 Запуск программ
+
 программа запускается по ссылкам
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/IlyaZutler/Project-OpenWeather/blob/main/colab_weather_sh.ipynb)
