@@ -5,7 +5,7 @@
 The program is designed to provide weather information for the requested city. Upon request, the service provides information on:
 
 - Local time in the city
-- Sunrise and sunset times (important for planning sightseeing and welcoming Shabbat)
+- Sunrise and sunset times (important for welcoming Shabbat and planning sightseeing)
 - Current temperature
 - Weather conditions
 - Humidity
