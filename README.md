@@ -1,7 +1,27 @@
 # Project OpenWeather
 
+Цель проекта
+Программа предназначена для предоставления информации о погоде в запрашиваемом Городе.
+По запросу сервис предоставляет информацию:
+Локальное время в городе
+Время восхода и захода солнца (важно для планирования осмотра достопримецательностей и встречи субботы) 
+Текущую температуру 
+Погодные условия
+Влажность
+
+График прогноза температуры на 5 дней
+Таблицу с расширенными данными о прогнозе погоды на 5 днейю
+
+Реализация
+Информация о погоде получается по API от сервиса OpenWeatherMap.
+Постоянные настройки размещены в файле param_defolt.json
+Использованные функции вынесены в файл библиотеку weather_lib.py
+Файл colab_weather_sh.ipynb для запуска программы из colab
+Файл main.py используется для запуска с сервиса streamlit 
+
+Запуск программ
+программа запускается по ссылкам
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/IlyaZutler/Project-OpenWeather/blob/main/colab_weather_sh.ipynb)
 
-project 1 in Bar Ilan DS17
 https://ds17-open-weather.streamlit.app/
