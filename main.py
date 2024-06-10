@@ -22,6 +22,7 @@ if st.button('Show Weather'):
         dt_txt_datetime, temp, temp_min, temp_max, humidity, description = wlib.data_to_lists(data)
         sunrise, sunset = wlib.get_sun_time(data)
         local_time = wlib.time_in_the_city(data)
+        city = data['city']['name'] + ' ' + data['city']['country']
 
         st.write(f'Time in the {city}:  {local_time.strftime("%H:%M     %d.%m.%Y")}')
         st.write(f'Sunrise:      {sunrise.strftime("%H:%M")}')
