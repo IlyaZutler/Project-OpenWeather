@@ -16,15 +16,11 @@ Additionally, the service provides:
 
 ## Implementation
 
-Weather information is obtained via the OpenWeatherMap API.
-
-The configuration settings are located in the `param_default.json` file.
-
-The utilized functions are stored in the library file `weather_lib.py`.
-
-The file `colab_weather.ipynb` is used to run the program from Colab.
-
-The `main.py` file is used to run the program from the Streamlit service.
+- Weather information is obtained via the OpenWeatherMap API.
+- The configuration settings are located in the `param_default.json` file.
+- The utilized functions are stored in the library file `weather_lib.py`.
+- The file `colab_weather.ipynb` is used to run the program from Colab.
+- The `main.py` file is used to run the program from the Streamlit service.
 
 ## Program Execution
 
