@@ -13,7 +13,7 @@ hi = defolt_parametrs['welcome']['hi']
 
 st.title('OpenWeather Forecast')
 st.write(hi)
-city = st.text_input('Enter City name: ', city)
+city = st.text_input('Enter the city (if necessary, add country code separated by comma): ', city)
 if st.button('Show Weather'):
     data = wlib.get_weather(city, units, key)
     if not data:
