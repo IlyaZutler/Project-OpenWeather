@@ -8,7 +8,6 @@ import pandas as pd
 
 def get_defolt_parametrs(url):
     response = requests.get(url)
-
     if response.status_code == 200:
         return json.loads(response.text)
     else:
